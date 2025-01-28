@@ -1,222 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Weekend Rotation Roster</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Roster - February 2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
         }
+
         h1 {
             text-align: center;
-            font-size: 2.5em;
+            font-size: 24px;
         }
-        h2 {
-            text-align: center;
-            font-size: 2em;
-        }
+
         table {
-            width: 100%;
+            margin: 20px auto;
             border-collapse: collapse;
-            margin: 20px 0;
+            width: 80%;
         }
+
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
+            font-size: 18px;
         }
+
         th {
-            background-color: #add8e6;
-            font-size: 1.2em;
+            background-color: lightblue;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .locked {
+            background-color: #e0e0e0;
+            pointer-events: none;
+        }
+
+        .lock-indicator {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Weekend Rotation Roster</h1>
-    
-    <h2>February 2025</h2>
+    <h1>February 2025 Weekend Roster</h1>
     <table>
         <thead>
             <tr>
-                <th>Weekend Date</th>
-                <th>Select Working Day</th>
-                <th>Resources</th>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Resource 1</th>
+                <th>Resource 2</th>
+                <th>Resource 3</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>February 1-2</td>
-                <td>
-                    <select>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                </td>
-                <td>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>February 8-9</td>
-                <td>
-                    <select>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                </td>
-                <td>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>February 15-16</td>
-                <td>
-                    <select>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                </td>
-                <td>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>February 22-23</td>
-                <td>
-                    <select>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                </td>
-                <td>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                   <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                    <select>
-                        <option value="Haroon">Haroon</option>
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Sharjeel">Sharjeel</option>
-                        <option value="Faiez">Faiez</option>
-                        <option value="Shayan">Shayan</option>
-                        <option value="Boota">Boota</option>
-                        <option value="ABdul Basit">ABdul Basit</option>
-                        <option value="Hasaan">Hasaan</option>
-                        <option value="New Joiner">New Joiner</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
+        <tbody id="rosterTable">
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        const teamMembers = [
+            "Choose",
+            "Haroon",
+            "Ahmed",
+            "Sharjeel",
+            "Faiez",
+            "Shayan",
+            "Boota",
+            "Abdul Basit",
+            "Hasaan",
+            "New Joiner"
+        ];
+
+        const rosterData = [
+            { date: "2025-02-01", day: "Saturday" },
+            { date: "2025-02-02", day: "Sunday" },
+            { date: "2025-02-08", day: "Saturday" },
+            { date: "2025-02-09", day: "Sunday" },
+            { date: "2025-02-15", day: "Saturday" },
+            { date: "2025-02-16", day: "Sunday" },
+            { date: "2025-02-22", day: "Saturday" },
+            { date: "2025-02-23", day: "Sunday" } 
+        ];
+
+        const locks = {}; // Object to store lock information
+
+        const rosterTable = document.getElementById("rosterTable");
+
+        function populateTable() {
+            rosterData.forEach((entry) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${entry.date}</td>
+                    <td>${entry.day}</td>
+                    <td>${createDropdown(entry.date, 1)}</td>
+                    <td>${createDropdown(entry.date, 2)}</td>
+                    <td>${createDropdown(entry.date, 3)}</td>
+                `;
+                rosterTable.appendChild(row);
+            });
+        }
+
+        function createDropdown(date, index) {
+            const uniqueKey = `${date}-${index}`;
+            return `
+                <select id="${uniqueKey}" onchange="lockSelection('${uniqueKey}')">
+                    ${teamMembers.map((member) => `<option>${member}</option>`).join("")}
+                </select>
+                <span class="lock-indicator" onclick="toggleLock('${uniqueKey}')">🔒</span>
+            `;
+        }
+
+        function lockSelection(uniqueKey) {
+            const dropdown = document.getElementById(uniqueKey);
+            if (dropdown.value !== "Choose" && locks[uniqueKey]?.locked) {
+                alert("This position is locked! Unlock it to make changes.");
+                dropdown.value = locks[uniqueKey].value; // Reset to previous value
+            }
+        }
+
+        function toggleLock(uniqueKey) {
+            if (!locks[uniqueKey]) {
+                const dropdown = document.getElementById(uniqueKey);
+                if (dropdown.value === "Choose") {
+                    alert("Please select a resource before locking.");
+                    return;
+                }
+                locks[uniqueKey] = { locked: true, value: dropdown.value };
+                dropdown.classList.add("locked");
+                alert("Position locked.");
+            } else {
+                const confirmUnlock = confirm("Are you sure you want to unlock this position?");
+                if (confirmUnlock) {
+                    const dropdown = document.getElementById(uniqueKey);
+                    locks[uniqueKey] = null;
+                    dropdown.classList.remove("locked");
+                    alert("Position unlocked.");
+                }
+            }
+        }
+
+        populateTable();
+    </script>
+</body>
+</html>
