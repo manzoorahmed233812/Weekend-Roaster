@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Roster - February 2025</title>
+    <title>Team Roster - February & March 2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,10 +54,18 @@
         .lock-indicator {
             cursor: pointer;
         }
+
+        .message {
+            color: red;
+            font-size: 16px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>February 2025 Weekend Roster</h1>
+    <div id="userPrompt"></div>
+    <div id="message" class="message"></div>
     <table>
         <thead>
             <tr>
@@ -70,6 +78,23 @@
             </tr>
         </thead>
         <tbody id="rosterTableFeb">
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <h1>March 2025 Weekend Roster</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Team</th>
+                <th>Resource 1</th>
+                <th>Resource 2</th>
+                <th>Resource 3</th>
+            </tr>
+        </thead>
+        <tbody id="rosterTableMar">
             <!-- Rows will be dynamically inserted here -->
         </tbody>
     </table>
@@ -108,7 +133,32 @@
             { date: "2025-02-23", day: "Sunday", team: "Islamabad" }
         ];
 
-        let lockStates = {}; // Track locked dropdowns
+        const rosterDataMar = [
+            { date: "2025-03-01", day: "Saturday", team: "Islamabad" },
+            { date: "2025-03-02", day: "Sunday", team: "Lahore" },
+            { date: "2025-03-08", day: "Saturday", team: "Lahore" },
+            { date: "2025-03-09", day: "Sunday", team: "Islamabad" },
+            { date: "2025-03-15", day: "Saturday", team: "Islamabad" },
+            { date: "2025-03-16", day: "Sunday", team: "Lahore" },
+            { date: "2025-03-22", day: "Saturday", team: "Lahore" },
+            { date: "2025-03-23", day: "Sunday", team: "Islamabad" },
+            { date: "2025-03-29", day: "Saturday", team: "Islamabad" },
+            { date: "2025-03-30", day: "Sunday", team: "Lahore" }
+        ];
+
+        const locks = {}; // Object to track locked fields
+        let currentUser = ""; // To track the current user
+
+        // Prompt for user authentication
+        function promptForUser() {
+            currentUser = prompt("Enter your name to use the roster:");
+            if (!currentUser) {
+                alert("You must enter your name to continue.");
+                promptForUser();
+            } else {
+                document.getElementById("userPrompt").innerText = `Logged in as: ${currentUser}`;
+            }
+        }
 
         function populateTable(rosterData, tableId) {
             const rosterTable = document.getElementById(tableId);
@@ -128,60 +178,42 @@
         }
 
         function createDropdown(date, index, teamMembers) {
-            const key = `${date}-${index}`;
+            const uniqueId = `${date}-${index}`;
             return `
                 <div>
-                    <select id="${key}" onchange="handleSelection('${key}')">
+                    <select id="${uniqueId}" onchange="lockDropdown('${uniqueId}')">
                         ${teamMembers.map((member) => `<option>${member}</option>`).join("")}
                     </select>
-                    <button onclick="toggleLock('${key}')">Lock</button>
+                    <span class="lock-indicator" onclick="unlockDropdown('${uniqueId}')">🔒</span>
                 </div>
             `;
         }
 
-        function handleSelection(key) {
-            const dropdown = document.getElementById(key);
-            if (lockStates[key] && lockStates[key].lockedBy !== getCurrentUser()) {
-                alert("This position is locked by another user.");
-                dropdown.value = lockStates[key].value;
+        function lockDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const selectedValue = dropdown.value;
+            if (selectedValue !== "Choose" && !locks[id]) {
+                locks[id] = currentUser;
+                dropdown.disabled = true; // Lock the dropdown
+            }
+        }
+
+        function unlockDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const messageDiv = document.getElementById("message");
+
+            if (locks[id] === currentUser) {
+                locks[id] = null;
+                dropdown.disabled = false; // Unlock the dropdown
+                messageDiv.innerText = ""; // Clear any previous error message
             } else {
-                lockStates[key] = {
-                    value: dropdown.value,
-                    lockedBy: lockStates[key]?.lockedBy || null
-                };
+                messageDiv.innerText = "You do not have permission to unlock this selection.";
             }
         }
 
-        function toggleLock(key) {
-            const currentUser = getCurrentUser();
-            if (!lockStates[key]) {
-                alert("Please select a value before locking.");
-                return;
-            }
-
-            if (lockStates[key].lockedBy && lockStates[key].lockedBy !== currentUser) {
-                alert("This position is locked by another user.");
-                return;
-            }
-
-            const dropdown = document.getElementById(key);
-            if (!lockStates[key].lockedBy) {
-                lockStates[key].lockedBy = currentUser;
-                dropdown.classList.add("locked");
-                alert("Position locked successfully.");
-            } else {
-                lockStates[key].lockedBy = null;
-                dropdown.classList.remove("locked");
-                alert("Position unlocked successfully.");
-            }
-        }
-
-        function getCurrentUser() {
-            // Simulate current user retrieval (replace with actual user management logic)
-            return prompt("Enter your name to identify yourself:");
-        }
-
+        promptForUser();
         populateTable(rosterDataFeb, "rosterTableFeb");
+        populateTable(rosterDataMar, "rosterTableMar");
     </script>
 </body>
 </html>
