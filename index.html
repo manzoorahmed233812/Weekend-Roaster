@@ -63,18 +63,19 @@
             <tr>
                 <th>Date</th>
                 <th>Day</th>
+                <th>Team</th>
                 <th>Resource 1</th>
                 <th>Resource 2</th>
                 <th>Resource 3</th>
             </tr>
         </thead>
-        <tbody id="rosterTable">
+        <tbody id="rosterTableFeb">
             <!-- Rows will be dynamically inserted here -->
         </tbody>
     </table>
 
     <script>
-        const teamMembers = [
+        const islamabadTeam = [
             "Choose",
             "Haroon",
             "Ahmed",
@@ -83,79 +84,104 @@
             "Shayan",
             "Boota",
             "Abdul Basit",
-            "Hasaan",
-            "New Joiner"
+            "Hasaan"
         ];
 
-        const rosterData = [
-            { date: "2025-02-01", day: "Saturday" },
-            { date: "2025-02-02", day: "Sunday" },
-            { date: "2025-02-08", day: "Saturday" },
-            { date: "2025-02-09", day: "Sunday" },
-            { date: "2025-02-15", day: "Saturday" },
-            { date: "2025-02-16", day: "Sunday" },
-            { date: "2025-02-22", day: "Saturday" },
-            { date: "2025-02-23", day: "Sunday" } 
+        const lahoreTeam = [
+            "Choose",
+            "Suleman",
+            "Tayyab",
+            "Zia",
+            "Arsalan",
+            "Arjumand",
+            "Hamza"
         ];
 
-        const locks = {}; // Object to store lock information
+        const rosterDataFeb = [
+            { date: "2025-02-01", day: "Saturday", team: "Islamabad" },
+            { date: "2025-02-02", day: "Sunday", team: "Lahore" },
+            { date: "2025-02-08", day: "Saturday", team: "Lahore" },
+            { date: "2025-02-09", day: "Sunday", team: "Islamabad" },
+            { date: "2025-02-15", day: "Saturday", team: "Islamabad" },
+            { date: "2025-02-16", day: "Sunday", team: "Lahore" },
+            { date: "2025-02-22", day: "Saturday", team: "Lahore" },
+            { date: "2025-02-23", day: "Sunday", team: "Islamabad" }
+        ];
 
-        const rosterTable = document.getElementById("rosterTable");
+        let lockStates = {}; // Track locked dropdowns
 
-        function populateTable() {
+        function populateTable(rosterData, tableId) {
+            const rosterTable = document.getElementById(tableId);
             rosterData.forEach((entry) => {
                 const row = document.createElement("tr");
+                const teamMembers = entry.team === "Islamabad" ? islamabadTeam : lahoreTeam;
                 row.innerHTML = `
                     <td>${entry.date}</td>
                     <td>${entry.day}</td>
-                    <td>${createDropdown(entry.date, 1)}</td>
-                    <td>${createDropdown(entry.date, 2)}</td>
-                    <td>${createDropdown(entry.date, 3)}</td>
+                    <td>${entry.team}</td>
+                    <td>${createDropdown(entry.date, 1, teamMembers)}</td>
+                    <td>${createDropdown(entry.date, 2, teamMembers)}</td>
+                    <td>${createDropdown(entry.date, 3, teamMembers)}</td>
                 `;
                 rosterTable.appendChild(row);
             });
         }
 
-        function createDropdown(date, index) {
-            const uniqueKey = `${date}-${index}`;
+        function createDropdown(date, index, teamMembers) {
+            const key = `${date}-${index}`;
             return `
-                <select id="${uniqueKey}" onchange="lockSelection('${uniqueKey}')">
-                    ${teamMembers.map((member) => `<option>${member}</option>`).join("")}
-                </select>
-                <span class="lock-indicator" onclick="toggleLock('${uniqueKey}')">🔒</span>
+                <div>
+                    <select id="${key}" onchange="handleSelection('${key}')">
+                        ${teamMembers.map((member) => `<option>${member}</option>`).join("")}
+                    </select>
+                    <button onclick="toggleLock('${key}')">Lock</button>
+                </div>
             `;
         }
 
-        function lockSelection(uniqueKey) {
-            const dropdown = document.getElementById(uniqueKey);
-            if (dropdown.value !== "Choose" && locks[uniqueKey]?.locked) {
-                alert("This position is locked! Unlock it to make changes.");
-                dropdown.value = locks[uniqueKey].value; // Reset to previous value
-            }
-        }
-
-        function toggleLock(uniqueKey) {
-            if (!locks[uniqueKey]) {
-                const dropdown = document.getElementById(uniqueKey);
-                if (dropdown.value === "Choose") {
-                    alert("Please select a resource before locking.");
-                    return;
-                }
-                locks[uniqueKey] = { locked: true, value: dropdown.value };
-                dropdown.classList.add("locked");
-                alert("Position locked.");
+        function handleSelection(key) {
+            const dropdown = document.getElementById(key);
+            if (lockStates[key] && lockStates[key].lockedBy !== getCurrentUser()) {
+                alert("This position is locked by another user.");
+                dropdown.value = lockStates[key].value;
             } else {
-                const confirmUnlock = confirm("Are you sure you want to unlock this position?");
-                if (confirmUnlock) {
-                    const dropdown = document.getElementById(uniqueKey);
-                    locks[uniqueKey] = null;
-                    dropdown.classList.remove("locked");
-                    alert("Position unlocked.");
-                }
+                lockStates[key] = {
+                    value: dropdown.value,
+                    lockedBy: lockStates[key]?.lockedBy || null
+                };
             }
         }
 
-        populateTable();
+        function toggleLock(key) {
+            const currentUser = getCurrentUser();
+            if (!lockStates[key]) {
+                alert("Please select a value before locking.");
+                return;
+            }
+
+            if (lockStates[key].lockedBy && lockStates[key].lockedBy !== currentUser) {
+                alert("This position is locked by another user.");
+                return;
+            }
+
+            const dropdown = document.getElementById(key);
+            if (!lockStates[key].lockedBy) {
+                lockStates[key].lockedBy = currentUser;
+                dropdown.classList.add("locked");
+                alert("Position locked successfully.");
+            } else {
+                lockStates[key].lockedBy = null;
+                dropdown.classList.remove("locked");
+                alert("Position unlocked successfully.");
+            }
+        }
+
+        function getCurrentUser() {
+            // Simulate current user retrieval (replace with actual user management logic)
+            return prompt("Enter your name to identify yourself:");
+        }
+
+        populateTable(rosterDataFeb, "rosterTableFeb");
     </script>
 </body>
 </html>
